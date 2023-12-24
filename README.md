@@ -3,6 +3,7 @@
 
 ## Installation
 Download precompiled binaries off the release tab in Github, or if you're ✨special✨, spend the next hour and a half trying to figure out why it is not compiling on your side. (looking at you, future me)
+### Warning, you /might/ receive a false positive detection by Windows Defender or whatever antivirus you use. This is due to the way I pause/play media, by sending virtual keystrokes, which CAN be seen as malicious by AV programs. I've submitted a false positive report to MSFT, and hopefully they accept it.
 
 ## Compile 
 Requirements:
