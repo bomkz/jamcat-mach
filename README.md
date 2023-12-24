@@ -8,13 +8,16 @@ Download precompiled binaries off the release tab in Github, or if you're ✨spe
 Requirements:
 - Golang
 - Mingw
-- CGO enabled
+- CGO enabled (check your goenv)
 - Hopes and dreams
 
-`git clone https://github.com/AngelFluffyOokami/jamcat-mach.git
-cd .\jamcat-mach
-go mod tidy
-go build`
+`git clone https://github.com/AngelFluffyOokami/jamcat-mach.git`
+
+`cd .\jamcat-mach`
+
+`go mod tidy`
+
+`go build`
 
 
 ## YOU
