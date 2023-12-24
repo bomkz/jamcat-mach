@@ -14,7 +14,7 @@ It then uses some quick maffs with the file names to determine whether you press
 
 JAMCAT-MACH also does some fancy logic to figure out where steam is installed, and then from there, where VTOL VR is installed as well. So you could have steam installed in a secondary drive, then VTOL VR installed in a third drive, and JAMCAT-MACH /should/ be able to figure out where the fuck everything is. But no promises. Just file a Github issue, or shoot me a DM at discord (@f45a) if you encounter an issue with this, I'll try to fix it, but no promises, and much less any implied warranties. 
 
-Just a caution, please back up anything in the RadioMusic folder if you put your own music there. 
+Just a caution, please backup anything in the RadioMusic folder if you put your own music there. 
 
 #### Don't be stupid.
 #### Don't close program with TaskMan unless necessary.
