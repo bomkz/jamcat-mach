@@ -1,8 +1,23 @@
 # jamcat-mach
  Jet Audio and Music Control Access Terminal-Media Access and Control Hub (WIndows Media Controls for VTOL VR without modloader)
 
+## Installation
+Download precompiled binaries off the release tab in Github, or if you're ✨special✨, spend the next hour and a half trying to figure out why it is not compiling on your side. (looking at you, future me)
 
-# YOU
+## Compile 
+Requirements:
+- Golang
+- Mingw
+- CGO enabled
+- Hopes and dreams
+
+`git clone https://github.com/AngelFluffyOokami/jamcat-mach.git
+cd .\jamcat-mach
+go mod tidy
+go build`
+
+
+## YOU
 YES YOU.
 You ever wished you could control other music players from within VTOL VR? I'm sure you have, just to be let down when you found out you had to use a modloader.
 #### Well you're in luck!
