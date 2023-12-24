@@ -16,9 +16,9 @@ JAMCAT-MACH also does some fancy logic to figure out where steam is installed, a
 
 Just a caution, please back up anything in the RadioMusic folder if you put your own music there. 
 
-# Don't be stupid.
-# Don't close program with TaskMan unless necessary.
-# Don't mess with log files while program is running.
-# Don't add, modify, or remove files in RadioMusic folder while program is running.
+#### Don't be stupid.
+#### Don't close program with TaskMan unless necessary.
+#### Don't mess with log files while program is running.
+#### Don't add, modify, or remove files in RadioMusic folder while program is running.
 
-Not that these situations are not handled, but I cannot promise no loss of data if you do this.
+(I did add a way to handle these situations except the first one, however, I cannot guarantee it will work 100 percent of the time, so just d o n ' t please)
