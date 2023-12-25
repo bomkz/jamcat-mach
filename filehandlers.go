@@ -111,9 +111,18 @@ func InitMP3() []string {
 	paths := getVTOLDir()
 
 	for _, x := range paths {
-		os.WriteFile(x+"RadioMusic\\0.mp3", blank, os.ModeAppend)
-		os.WriteFile(x+"RadioMusic\\1.mp3", blank, os.ModeAppend)
-		os.WriteFile(x+"RadioMusic\\2.mp3", blank, os.ModeAppend)
+		err = os.WriteFile(x+"RadioMusic\\0.mp3", blank, os.ModeAppend)
+		if err != nil {
+			log.Panic(err)
+		}
+		err = os.WriteFile(x+"RadioMusic\\1.mp3", blank, os.ModeAppend)
+		if err != nil {
+			log.Panic(err)
+		}
+		err = os.WriteFile(x+"RadioMusic\\2.mp3", blank, os.ModeAppend)
+		if err != nil {
+			log.Panic(err)
+		}
 	}
 
 	os.WriteFile("", nil, os.ModeAppend)

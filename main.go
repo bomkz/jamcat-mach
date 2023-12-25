@@ -26,7 +26,7 @@ I have not experienced any data loss using this, and there shouldn't be any to e
 Licensed under MPLv2`)
 
 	bkpPlayerMp3()
-	// InitMP3()
+	InitMP3()
 
 	go readLog()
 	fmt.Println("JET-MACH is now listening to log events.")

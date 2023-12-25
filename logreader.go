@@ -51,14 +51,14 @@ func logHandler(newline string) bool {
 	if strings.Contains(newline, "Playing song:") {
 		splitline := strings.SplitAfter(newline, "clip length")
 		if strings.Contains(splitline[0], "0") {
+			fmt.Println("Spike bearing 0, angels " + fmt.Sprint(currentTrack) + ".")
 			track0(currentTrack)
-			fmt.Println("Spike bearing 0, angels " + fmt.Sprint(currentTrack) + ".")
 		} else if strings.Contains(splitline[0], "1") {
+			fmt.Println("Spike bearing 1, angels " + fmt.Sprint(currentTrack) + ".")
 			track1(currentTrack)
-			fmt.Println("Spike bearing 0, angels " + fmt.Sprint(currentTrack) + ".")
 		} else if strings.Contains(splitline[0], "2") {
-			track2(currentTrack)
 			fmt.Println("Spike bearing 2, angels " + fmt.Sprint(currentTrack) + ".")
+			track2(currentTrack)
 		}
 		return true
 	} else if strings.Contains(newline, "FlightLogger:") && strings.Contains(newline, "has spawned.") {
@@ -105,18 +105,18 @@ func (Track0) TrackZero() {
 	currentTrack = 0
 }
 func (Track0) TrackOne() {
-	robotgo.KeyTap(robotgo.AudioNext)
+	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 0
 }
 func (Track0) TrackTwo() {
-	robotgo.KeyTap(robotgo.AudioPrev)
+	robotgo.KeyTap(robotgo.AudioNext)
 	currentTrack = 0
 }
 
 type Track0 struct{}
 
 func (Track1) TrackZero() {
-	robotgo.KeyTap(robotgo.AudioPrev)
+	robotgo.KeyTap(robotgo.AudioNext)
 	currentTrack = 1
 }
 
@@ -126,23 +126,24 @@ func (Track1) TrackOne() {
 }
 
 func (Track1) TrackTwo() {
-	robotgo.KeyTap(robotgo.AudioNext)
+	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 1
 }
 
 type Track1 struct{}
 
 func (Track2) TrackZero() {
-	robotgo.KeyTap(robotgo.AudioNext)
+	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 2
 }
 
 func (Track2) TrackOne() {
-	robotgo.KeyTap(robotgo.AudioPrev)
+	robotgo.KeyTap(robotgo.AudioNext)
 	currentTrack = 2
 }
 func (Track2) TrackTwo() {
 	robotgo.KeyTap(robotgo.AudioPlay)
+	currentTrack = 2
 }
 
 type Track2 struct{}
