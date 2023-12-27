@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Find where tf the directory is
+      run: ls 
+      
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
