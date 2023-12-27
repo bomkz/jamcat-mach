@@ -21,7 +21,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: 'latest'
+        go-version-file: '.\go.mod'
 
     - name: Set up MinGW
       uses: egor-tensin/setup-mingw@v2
