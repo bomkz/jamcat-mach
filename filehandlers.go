@@ -40,7 +40,10 @@ func backup(file fs.DirEntry, path string) {
 	if validBackup(file.Name()) {
 
 		fmt.Println("File: " + file.Name() + " valid for backup.")
-		os.Rename(path+"RadioMusic\\"+file.Name(), path+"RadioMusic\\"+file.Name()+".bkp")
+		err := os.Rename(path+"RadioMusic\\"+file.Name(), path+"RadioMusic\\"+file.Name()+".bkp")
+		if err != nil {
+			log.Panic(err)
+		}
 
 	} else {
 
@@ -95,11 +98,33 @@ func compareHandler(path string, name string) bool {
 		if err != nil {
 			log.Panic(err)
 		}
+
+		switch name {
+		case "0.mp3":
+			equalsZero = append(equalsZero, false)
+		case "1.mp3":
+			equalsOne = append(equalsOne, false)
+		case "2.mp3":
+			equalsTwo = append(equalsTwo, false)
+		}
 		return false
 	}
 	fmt.Println("Found " + name + " in directory, detected file equals, not backing up.")
+
+	switch name {
+	case "0.mp3":
+		equalsZero = append(equalsZero, true)
+	case "1.mp3":
+		equalsOne = append(equalsOne, true)
+	case "2.mp3":
+		equalsTwo = append(equalsTwo, true)
+	}
 	return true
 }
+
+var equalsZero []bool
+var equalsOne []bool
+var equalsTwo []bool
 
 func InitMP3() []string {
 
@@ -110,22 +135,31 @@ func InitMP3() []string {
 
 	paths := getVTOLDir()
 
-	for _, x := range paths {
-		err = os.WriteFile(x+"RadioMusic\\0.mp3", blank, os.ModeAppend)
-		if err != nil {
-			log.Panic(err)
+	for z, x := range paths {
+		if !equalsZero[z] {
+			err = os.WriteFile(x+"RadioMusic\\0.mp3", blank, 0777)
+			if err != nil {
+				log.Panic(err)
+			}
 		}
-		err = os.WriteFile(x+"RadioMusic\\1.mp3", blank, os.ModeAppend)
-		if err != nil {
-			log.Panic(err)
+
+		if !equalsOne[z] {
+			err = os.WriteFile(x+"RadioMusic\\1.mp3", blank, 0777)
+			if err != nil {
+				log.Panic(err)
+			}
 		}
-		err = os.WriteFile(x+"RadioMusic\\2.mp3", blank, os.ModeAppend)
-		if err != nil {
-			log.Panic(err)
+
+		if !equalsTwo[z] {
+			err = os.WriteFile(x+"RadioMusic\\2.mp3", blank, 0777)
+			if err != nil {
+				log.Panic(err)
+			}
 		}
+
 	}
 
-	os.WriteFile("", nil, os.ModeAppend)
+	os.WriteFile("", nil, 0777)
 
 	return paths
 

@@ -68,81 +68,93 @@ func logHandler(newline string) bool {
 }
 
 func track2(track int) {
+
 	switch track {
 	case 0:
-		Track2{}.TrackZero()
+		Track2{}.RW()
+
 	case 1:
-		Track2{}.TrackOne()
-	case 2:
-		Track2{}.TrackTwo()
+		Track2{}.FF()
+
+	default:
+		Track2{}.Play()
 	}
+
 }
 
 func track1(track int) {
+
 	switch track {
 	case 0:
-		Track1{}.TrackZero()
-	case 1:
-		Track1{}.TrackOne()
+		Track1{}.FF()
 	case 2:
-		Track1{}.TrackTwo()
+		Track1{}.RW()
+
+	default:
+		Track1{}.Play()
 	}
+
 }
 
 func track0(track int) {
+
 	switch track {
-	case 0:
-		Track0{}.TrackZero()
 	case 1:
-		Track0{}.TrackOne()
+		Track0{}.RW()
+
 	case 2:
-		Track0{}.TrackTwo()
+		Track0{}.FF()
+
+	default:
+		Track0{}.Play()
 	}
+
 }
 
-func (Track0) TrackZero() {
+func (Track0) Play() {
 	robotgo.KeyTap(robotgo.AudioPlay)
 	currentTrack = 0
 }
-func (Track0) TrackOne() {
+func (Track0) RW() {
 	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 0
 }
-func (Track0) TrackTwo() {
+func (Track0) FF() {
 	robotgo.KeyTap(robotgo.AudioNext)
 	currentTrack = 0
 }
 
 type Track0 struct{}
 
-func (Track1) TrackZero() {
-	robotgo.KeyTap(robotgo.AudioNext)
-	currentTrack = 1
-}
-
-func (Track1) TrackOne() {
+func (Track1) Play() {
 	robotgo.KeyTap(robotgo.AudioPlay)
 	currentTrack = 1
 }
 
-func (Track1) TrackTwo() {
+func (Track1) FF() {
+	robotgo.KeyTap(robotgo.AudioNext)
+	currentTrack = 1
+}
+
+func (Track1) RW() {
 	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 1
 }
 
 type Track1 struct{}
 
-func (Track2) TrackZero() {
-	robotgo.KeyTap(robotgo.AudioPrev)
+func (Track2) Play() {
+	robotgo.KeyTap(robotgo.AudioPlay)
 	currentTrack = 2
 }
 
-func (Track2) TrackOne() {
+func (Track2) FF() {
 	robotgo.KeyTap(robotgo.AudioNext)
 	currentTrack = 2
 }
-func (Track2) TrackTwo() {
-	robotgo.KeyTap(robotgo.AudioPlay)
+
+func (Track2) RW() {
+	robotgo.KeyTap(robotgo.AudioPrev)
 	currentTrack = 2
 }
 
