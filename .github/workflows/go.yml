@@ -27,7 +27,9 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
-    
+    - name: Set up JAMCAT-MACH
+      run: go mod tidy
+      
     - name: Build JAMCAT-MACH
       run: GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC="x86_64-w64-mingw32-gcc" go build -ldflags="-X 'main.Version=${{ github.event.inputs.Version }}'" -o JAMCAT-MACH-${{ github.event.inputs.Version }}.exe -v ./...
 
