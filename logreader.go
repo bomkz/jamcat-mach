@@ -63,6 +63,7 @@ func logHandler(newline string) bool {
 		return true
 	} else if strings.Contains(newline, "FlightLogger:") && strings.Contains(newline, "has spawned.") {
 		currentTrack = 0
+		fmt.Println("Splash 1, bearing 0")
 	}
 	return false
 }

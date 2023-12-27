@@ -30,10 +30,19 @@ I have not experienced any data loss using this, and there shouldn't be any to e
 Licensed under MPLv2
 ------------------------------------------------------------------------------------------------------
 
+Log meaning:
+Bearing X, the song VTOL VR thinks it's playing, where X equals the name of the mp3. E.g. 1.mp3 = Bearing 1
 
+Angels X, the song VTOL VR thought it was playing before the current bearing, where X equals the name of the mp3. E.g. 0.mp3 = Angels 0
 
+Interpreting this means if spike bearing goes backwards in regards to angels, then song will be rewinded. E.g. 0<-1<-2<-0
+Vice versa is also true. E.g. 0->1->2->0
+
+Splash 1, angels 0. Means player died, and the program is now expecting VTOL VR to start playing 0.mp3 again if player presses play button.
+
+------------------------------------------------------------------------------------------------------
 ! ! JAMCAT-MACH is starting up, please make sure you are currently not spawned in an aircraft if VTOL VR is already running ! !
-
+------------------------------------------------------------------------------------------------------
 
 
 `)
