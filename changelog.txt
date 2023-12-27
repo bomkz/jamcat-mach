@@ -1,0 +1,14 @@
+Changelog JAMCAT-MACH 1.0 --> JAMCAT-MACH 1.5
+
+Fixed bug in original Index Out of Range fix causing Index Out of Range
+
+Changelog JAMCAT-MACH 1.0 --> JAMCAT-MACH 1.5
+
+
+Fixed song rewind logic bug in code
+Fixed file permission errors
+Fixed Index Out of Range
+Fixed typos in messages
+
+Added missing error handling code
+Improved stability
