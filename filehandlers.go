@@ -150,34 +150,35 @@ func InitMP3() []string {
 				log.Panic(err)
 			}
 		}
+
+	} else {
+
+		for z, x := range paths {
+			if !equalsZero[z] {
+				err = os.WriteFile(x+"RadioMusic\\0.mp3", blank, 0777)
+				if err != nil {
+					log.Panic(err)
+				}
+
+			}
+
+			if !equalsOne[z] {
+				err = os.WriteFile(x+"RadioMusic\\1.mp3", blank, 0777)
+				if err != nil {
+					log.Panic(err)
+				}
+			}
+
+			if !equalsTwo[z] {
+				err = os.WriteFile(x+"RadioMusic\\2.mp3", blank, 0777)
+				if err != nil {
+					log.Panic(err)
+				}
+			}
+
+		}
+
 	}
-
-	for z, x := range paths {
-		if !equalsZero[z] {
-			err = os.WriteFile(x+"RadioMusic\\0.mp3", blank, 0777)
-			if err != nil {
-				log.Panic(err)
-			}
-
-		}
-
-		if !equalsOne[z] {
-			err = os.WriteFile(x+"RadioMusic\\1.mp3", blank, 0777)
-			if err != nil {
-				log.Panic(err)
-			}
-		}
-
-		if !equalsTwo[z] {
-			err = os.WriteFile(x+"RadioMusic\\2.mp3", blank, 0777)
-			if err != nil {
-				log.Panic(err)
-			}
-		}
-
-	}
-
-	os.WriteFile("", nil, 0777)
 
 	return paths
 
