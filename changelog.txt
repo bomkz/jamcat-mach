@@ -1,4 +1,14 @@
-Changelog JAMCAT-MACH 1.0 --> JAMCAT-MACH 1.5
+Changelog JAMCAT-MACH 1.5.1 --> JAMCAT-MACH 1.6
+
+Cleaned up some code
+Added safety check to checkRemoval() function to prevent data loss
+
+Changelog JAMCAT-MACH 1.5.1 --> JAMCAT-MACH 1.5.2
+
+Removed unused code
+Commented most functions
+
+Changelog JAMCAT-MACH 1.5 --> JAMCAT-MACH 1.5.1
 
 Fixed bug in original Index Out of Range fix causing Index Out of Range
 
