@@ -122,10 +122,6 @@ func compareHandler(path string, name string) bool {
 	return true
 }
 
-var equalsZero []bool
-var equalsOne []bool
-var equalsTwo []bool
-
 func InitMP3() []string {
 
 	blank, err := embeds.ReadFile("blank.mp3")

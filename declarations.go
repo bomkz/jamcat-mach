@@ -80,3 +80,7 @@ func (Track2) RW() {
 type Track2 struct{}
 
 var tick = make(chan bool)
+
+var equalsZero []bool
+var equalsOne []bool
+var equalsTwo []bool

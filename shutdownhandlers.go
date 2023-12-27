@@ -10,6 +10,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/udhos/equalfile"
 )
 
 func gracefulShutdown(ctx context.Context, timeout time.Duration, ops map[string]operation) <-chan struct{} {
@@ -97,10 +99,8 @@ func checkRestore(path string, name string) {
 }
 
 // checks if mp3 file is the one jamcat-mach itself embedded in there, and if so, deletes it.
-// DOES NOT CHECK IF THE FILE IS ACTUALLY THE SAME, ONLY IF ITS NAMED THE SAME.
-// to do: add function that actually compares the file, just in case anyone does anything stupid and gets their data lost
 func checkRemoval(path string, name string) {
-	if validRemoval(name) {
+	if validRemoval(name) && compareMp3File(path, name) {
 		fmt.Println("Cleaning up blank mp3 files.")
 		os.Remove(path + "RadioMusic\\" + name)
 	}
@@ -109,4 +109,36 @@ func checkRemoval(path string, name string) {
 // checks if files fit name filter
 func validRemoval(name string) bool {
 	return name == "0.mp3" || name == "1.mp3" || name == "2.mp3"
+}
+
+// Returns whether file contents match up with embedded file or not.
+func compareMp3File(path string, name string) bool {
+	blank, err := embeds.Open("blank.mp3")
+	if err != nil {
+		log.Panic(err)
+	}
+	defer blank.Close()
+
+	compare := equalfile.New(nil, equalfile.Options{})
+
+	file, err := os.Open(path + "RadioMusic\\" + name)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	defer file.Close()
+
+	equal, err := compare.CompareReader(blank, file)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if !equal {
+		fmt.Println("Found " + name + " in directory, file contents do not match up, marked unsafe for removal.")
+
+		return false
+	}
+	fmt.Println("Found " + name + " in directory, file contents match up, and marked safe for removle.")
+
+	return true
 }
