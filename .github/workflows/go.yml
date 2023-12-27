@@ -17,14 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: Find where tf the directory is
-      run: ls 
       
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version-file: '.\go.mod'
+        go-version-file: './go.mod'
 
     - name: Set up MinGW
       uses: egor-tensin/setup-mingw@v2
