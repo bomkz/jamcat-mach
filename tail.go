@@ -5,8 +5,7 @@ import (
 	"os"
 )
 
-var tick = make(chan bool)
-
+// reads the log file.
 func readLogFile() string {
 	home, err := os.UserHomeDir()
 	if err != nil {

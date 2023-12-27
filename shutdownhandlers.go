@@ -59,6 +59,7 @@ func gracefulShutdown(ctx context.Context, timeout time.Duration, ops map[string
 	return wait
 }
 
+// function that runs the bkp restore functions for all possible VTOL VR paths
 func revertBkp() {
 
 	paths := getVTOLDir()
@@ -83,6 +84,7 @@ func revertBkp() {
 	}
 }
 
+// Checks if there are any .bkp files that need to be restored, and restores them
 func checkRestore(path string, name string) {
 	if strings.Contains(name, ".bkp") {
 		fmt.Println("Restoring file: " + name + ".")
@@ -94,6 +96,9 @@ func checkRestore(path string, name string) {
 	}
 }
 
+// checks if mp3 file is the one jamcat-mach itself embedded in there, and if so, deletes it.
+// DOES NOT CHECK IF THE FILE IS ACTUALLY THE SAME, ONLY IF ITS NAMED THE SAME.
+// to do: add function that actually compares the file, just in case anyone does anything stupid and gets their data lost
 func checkRemoval(path string, name string) {
 	if validRemoval(name) {
 		fmt.Println("Cleaning up blank mp3 files.")
@@ -101,6 +106,7 @@ func checkRemoval(path string, name string) {
 	}
 }
 
+// checks if files fit name filter
 func validRemoval(name string) bool {
 	return name == "0.mp3" || name == "1.mp3" || name == "2.mp3"
 }

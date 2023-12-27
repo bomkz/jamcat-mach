@@ -8,14 +8,15 @@ import (
 	lnk "github.com/parsiya/golnk"
 )
 
+// Looks up where VTOL VR is installed by parsing libraryfolders.vdf and finding out where steam has it stored based on that data.
 func getVTOLDir() []string {
 
 	file, err := os.Open(getSteamDir() + "\\steamapps\\libraryfolders.vdf")
-
 	if err != nil {
 		log.Panic(err)
 	}
 
+	// Instantiates a new steam VDF parser and reads the VDF file.
 	vdfP := vdf.NewParser(file)
 	vdfInf, err := vdfP.Parse()
 
@@ -25,6 +26,7 @@ func getVTOLDir() []string {
 
 	var libs []vdflib
 
+	// Saves the VDF file contents to a golang struct.
 	for _, x := range vdfInf["libraryfolders"].(map[string]interface{}) {
 		var newLib vdflib
 		for f, y := range x.(map[string]interface{}) {
@@ -59,6 +61,7 @@ func getVTOLDir() []string {
 
 	var possiblePaths []string
 
+	// Saves all possible VTOL VR paths to a variable
 	for _, x := range libs {
 		for _, y := range x.Apps {
 			if y.AppID == "667970" {
@@ -71,6 +74,7 @@ func getVTOLDir() []string {
 	return possiblePaths
 }
 
+// Finds where steam is installed based on the steam.lnk shortcut in the Windows Start Menu.
 func getSteamDir() string {
 
 	home, err := os.UserHomeDir()

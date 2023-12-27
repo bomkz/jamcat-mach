@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"strings"
 	"time"
-
-	"github.com/go-vgo/robotgo"
 )
 
 func tickTime() {
@@ -17,36 +15,49 @@ func tickTime() {
 }
 
 func readLog() {
-	// home, err := os.UserHomeDir()
 
+	// Start log reading ticker
 	go tickTime()
+
+	/*
+	*Set readlog to false,
+	*prevents unwanted media inputs caused by log being read for first time
+	*when player is already in game and has pressed buttons.
+	 */
 	readlog := false
-	// go addWatcher(home + "\\AppData\\LocalLow\\Boundless Dynamics, LLC\\VTOLVR\\Player.log")go addWatcher(home + "\\AppData\\LocalLow\\Boundless Dynamics, LLC\\VTOLVR\\Player.log")
+
+	// Reads log every tick.
 	for {
 		<-tick
+
+		// Reads log line by line
 		logFile := readLogFile()
 		scanLog := bufio.NewScanner(strings.NewReader(logFile))
 		var logLinesTmp []string
+
+		// Appends each log line to a variable.
 		for scanLog.Scan() {
 			logLinesTmp = append(logLinesTmp, scanLog.Text())
 		}
 
+		// Only takes action on log lines that are new, and ignores old ones.
 		for y, x := range logLinesTmp {
 			if y > (len(logLines) - 1) {
 				if readlog {
+					// Handles new log lines.
 					logHandler(x)
 				}
 
 			}
 		}
 		logLines = logLinesTmp
+
+		// Set to true after the first for loop passes
 		readlog = true
 	}
 }
 
-var logLines []string
-var currentTrack int
-
+// Runs the appropriate function depending on the log line contents.
 func logHandler(newline string) bool {
 	if strings.Contains(newline, "Playing song:") {
 		splitline := strings.SplitAfter(newline, "clip length")
@@ -68,6 +79,7 @@ func logHandler(newline string) bool {
 	return false
 }
 
+// Selects the proper actions depending on current context
 func track2(track int) {
 
 	switch track {
@@ -83,6 +95,7 @@ func track2(track int) {
 
 }
 
+// Selects the proper actions depending on current context
 func track1(track int) {
 
 	switch track {
@@ -97,6 +110,7 @@ func track1(track int) {
 
 }
 
+// Selects the proper actions depending on current context
 func track0(track int) {
 
 	switch track {
@@ -111,52 +125,3 @@ func track0(track int) {
 	}
 
 }
-
-func (Track0) Play() {
-	robotgo.KeyTap(robotgo.AudioPlay)
-	currentTrack = 0
-}
-func (Track0) RW() {
-	robotgo.KeyTap(robotgo.AudioPrev)
-	currentTrack = 0
-}
-func (Track0) FF() {
-	robotgo.KeyTap(robotgo.AudioNext)
-	currentTrack = 0
-}
-
-type Track0 struct{}
-
-func (Track1) Play() {
-	robotgo.KeyTap(robotgo.AudioPlay)
-	currentTrack = 1
-}
-
-func (Track1) FF() {
-	robotgo.KeyTap(robotgo.AudioNext)
-	currentTrack = 1
-}
-
-func (Track1) RW() {
-	robotgo.KeyTap(robotgo.AudioPrev)
-	currentTrack = 1
-}
-
-type Track1 struct{}
-
-func (Track2) Play() {
-	robotgo.KeyTap(robotgo.AudioPlay)
-	currentTrack = 2
-}
-
-func (Track2) FF() {
-	robotgo.KeyTap(robotgo.AudioNext)
-	currentTrack = 2
-}
-
-func (Track2) RW() {
-	robotgo.KeyTap(robotgo.AudioPrev)
-	currentTrack = 2
-}
-
-type Track2 struct{}
