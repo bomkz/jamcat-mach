@@ -33,9 +33,14 @@ jobs:
     - name: Build JAMCAT-MACH
       run: GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC="x86_64-w64-mingw32-gcc" go build -ldflags="-X 'main.Version=${{ github.event.inputs.Version }}'" -o JAMCAT-MACH-${{ github.event.inputs.Version }}.exe -v ./...
 
-    - name: Upload Release Asset
+    - name: Create new Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
         gh release create ${{ github.event.inputs.Version }} --target main 
+    
+    - name: Upload Release Asset
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run:
         gh release upload ${{ github.event.inputs.Version }} JAMCAT-MACH-${{ github.event.inputs.Version }}.exe
