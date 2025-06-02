@@ -1,4 +1,4 @@
-module github.com/angelfluffyookami/jamcat-mach
+module github.com/bomkz/jamcat-mach
 
 go 1.21.5
 
